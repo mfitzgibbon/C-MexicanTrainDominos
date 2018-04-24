@@ -106,10 +106,10 @@ namespace MTDClasses
         public string Filename => String.Format("d{0}{1}.png", side1, side2);
 
         // could you overload the == and != operators?
-        public override bool operator ==(Domino d1, Domino d2) => 
+        public static bool operator ==(Domino d1, Domino d2) =>
             (d1.Side1 == d2.Side1 && d1.Side2 == d2.Side2) ? true : false;
 
-        public override bool operator !=(Domino d1, Domino d2) =>
+        public static bool operator !=(Domino d1, Domino d2) =>
             (d1.Side1 != d2.Side1 || d1.Side2 != d2.Side2) ? true : false;
 
         public override bool Equals(object obj)
@@ -134,61 +134,5 @@ namespace MTDClasses
         }
     }
 
-    public class Train
-    {
-        private List<Domino> dominos;
-        private int engineValue;
 
-        public int Count => dominos.Count;
-
-        public int EngineValue
-        {
-            get { this.engineValue; }
-            set { this.engineValue = value; }
-        }
-
-        public bool IsEmpty => (dominos.Count == 0) ? true : false;
-        public Domino LastDomino => dominos.Last;
-        public int PlayableValue => dominos.Last.Side2;
-        public Domino this[int i] => dominos[i];
-
-        public void Add(Domino d) => this.dominos.Add(d);
-
-        //public bool IsPlayable(Domino d, out bool mustFlip) =>
-        //    (d.Side1 == this.PlayableValue) ? true : (d.Side2 == this.PlayableValue) ? mustFlip = true;
-
-        public bool IsPlayable(Domino d, out bool mustFlip)
-        {
-            if(d.Side1 == this.PlayableValue)
-            {
-                mustFlip = false;
-                return true;
-            }
-            else if(d.Side2 == this.PlayableValue)
-            {
-                mustFlip = true;
-                return true;
-            }
-            else
-            {
-                mustFlip = false;
-                return false;
-            }
-        }
-
-        public void Play(Domino d) => this.dominos.Remove(d);
-        public string Show(int number) => this[number].ToString();
-
-        public override string ToString()
-        {
-            string retString;
-            int cardNum;
-
-            foreach(Domino d in dominos)
-            {
-                retString += String.Format("Domino{0}: {1}", cardNum, d.ToString()) + "/n";
-            }
-        }
-
-     }
 }
