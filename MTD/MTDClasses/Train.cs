@@ -12,12 +12,23 @@ namespace MTDClasses
         private List<Domino> dominos;
         private int engineValue;
 
+        public Train()
+        {
+            dominos = new List<Domino>();
+            dominos.Add(new Domino(12, 12));
+        }
+
+        public Train(int engineValue)
+        {
+            dominos = new List<Domino>();
+            dominos.Add(new Domino(engineValue, engineValue));
+        }
+
         public int Count => dominos.Count;
 
         public int EngineValue
         {
-            get => this.engineValue;
-            set => this.engineValue = value;
+            get => dominos.First().Side2;
         }
 
         public bool IsEmpty => (dominos.Count == 0) ? true : false;
@@ -32,12 +43,12 @@ namespace MTDClasses
 
         public bool IsPlayable(Domino d, out bool mustFlip)
         {
-            if (d.Side1 == this.PlayableValue)
+            if (d.Side1 == this.PlayableValue || d.Side1 == 0)
             {
                 mustFlip = false;
                 return true;
             }
-            else if (d.Side2 == this.PlayableValue)
+            else if (d.Side2 == this.PlayableValue || d.Side2 == 0)
             {
                 mustFlip = true;
                 return true;
@@ -49,7 +60,28 @@ namespace MTDClasses
             }
         }
 
-        public void Play(Domino d) => this.dominos.Remove(d);
+        public void Play(Domino d)
+        {
+            bool needsFlip;
+            if(IsPlayable(d, out needsFlip))
+            {
+                if (needsFlip)
+                {
+                    d.Flip();
+                    dominos.Add(d);
+                }
+                else
+                {
+                    dominos.Add(d);
+                }
+            }
+            else
+            {
+                throw new Exception("Param Domino d is not a playable domino, flipped or otherwise." +
+                    " Please pass a playable domino");
+            }
+        }
+
         public string Show(int number) => this[number].ToString();
 
         public override string ToString()
