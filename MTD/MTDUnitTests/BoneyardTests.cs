@@ -16,6 +16,7 @@ namespace MTDUnitTests
         Boneyard boneyard12;
         Boneyard boneyard6;
         Boneyard emptyBoneyard;
+        Boneyard cloneBoneyard;
 
         [SetUp]
         public void SetUpAllTests()
@@ -24,6 +25,7 @@ namespace MTDUnitTests
             boneyard12 = new Boneyard();
             boneyard6 = new Boneyard(6);
             emptyBoneyard = new Boneyard(-1);
+            cloneBoneyard = boneyard12;
         }
 
         [Test]
@@ -76,7 +78,6 @@ namespace MTDUnitTests
         [Test]
         public void BoneyardShuffle()
         {
-            Boneyard cloneBoneyard = boneyard12;
             Domino d1 = cloneBoneyard[12];
             Assert.AreEqual(cloneBoneyard[12].ToString(), d1.ToString());
             cloneBoneyard.Shuffle();
@@ -86,7 +87,7 @@ namespace MTDUnitTests
         [Test]
         public void BoneyardToString()
         {
-
+            Assert.AreEqual(cloneBoneyard.ToString(), boneyard12.ToString());
         }
     }
 }
