@@ -18,7 +18,7 @@ namespace MTDUnitTests
         Domino d33;
 
         [SetUp]
-        public void SetUpAllTests()
+        public void SetupAllTests()
         {
             def = new Domino();
             d12 = new Domino(1, 2);

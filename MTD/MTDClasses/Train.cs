@@ -16,7 +16,7 @@ namespace MTDClasses
 
         public int EngineValue
         {
-            get => this.engineValue;
+            get => engineValue;
             set => this.engineValue = value;
         }
 
@@ -50,12 +50,12 @@ namespace MTDClasses
 
         public bool IsPlayable(Domino d, out bool mustFlip)
         {
-            if (d.Side1 == this.PlayableValue)
+            if (d.Side1 == this.PlayableValue || d.Side1 == 0)
             {
                 mustFlip = false;
                 return true;
             }
-            else if (d.Side2 == this.PlayableValue)
+            else if (d.Side2 == this.PlayableValue || d.Side2 == 0)
             {
                 mustFlip = true;
                 return true;
@@ -70,7 +70,7 @@ namespace MTDClasses
         public void Play(Domino d)
         {
             bool mustFlip;
-            if(IsPlayable(d, out mustFlip))
+            if (IsPlayable(d, out mustFlip))
             {
                 if (!mustFlip)
                 {
