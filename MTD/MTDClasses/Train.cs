@@ -9,8 +9,8 @@ namespace MTDClasses
     [Serializable()]
     public class Train
     {
-        private List<Domino> dominos;
-        private int engineValue;
+        protected List<Domino> dominos;
+        protected int engineValue;
 
         public int Count => dominos.Count;
 

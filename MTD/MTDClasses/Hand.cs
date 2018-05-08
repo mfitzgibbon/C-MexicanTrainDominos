@@ -179,7 +179,11 @@ namespace MTDClasses
 
         public int IndexOfHighDouble()
         {
-            Domino d = GetDoubleDomino(12);
+            Domino d;
+            do
+            {
+              d = GetDoubleDomino(12);
+            } while (d == null);
             if (d != null)
             {
                 return handOfDominos.IndexOf(d);

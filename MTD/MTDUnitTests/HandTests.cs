@@ -123,7 +123,6 @@ namespace MTDUnitTests
             {
                 Assert.Pass("Method threw the proper exception");
             }
-
         }
     }
 }
