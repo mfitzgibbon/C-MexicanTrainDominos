@@ -187,5 +187,67 @@ namespace MTDClasses
             else
                 throw new Exception("The high double is not in this hand");
         }
+
+        public void Play(Domino d, Train t)
+        {
+            if (t.IsPlayable(d, out bool mustFlip))
+            {
+                if (mustFlip != true)
+                    t.Play(d);
+                else
+                {
+                    d.Flip();
+                    t.Play(d);
+                }
+                handOfDominos.Remove(d);
+            }
+
+            throw new Exception("Domino is not playable on this train");
+        }
+
+        public void Play(int index, Train t)
+        {
+            Domino d = handOfDominos[index];
+            if (t.IsPlayable(d, out bool mustFlip))
+            {
+                if (mustFlip != true)
+                    t.Play(d);
+                else
+                {
+                    d.Flip();
+                    t.Play(d);
+                }
+                handOfDominos.Remove(d);
+            }
+            throw new Exception("Domino is not playable on this train");
+        }
+
+        public void Play(Train t)
+        {
+            int pipValue = t.PlayableValue;
+            Domino d = GetDomino(pipValue);
+            if (d != null)
+            {
+                t.Play(d);
+                handOfDominos.Remove(d);
+            }
+            else
+                throw new Exception("No playable dominos on this train");
+        }
+
+        public void RemoveAt(int index)
+        {
+            handOfDominos.RemoveAt(index);
+        }
+
+        public override string ToString()
+        {
+            string str = "";
+            foreach(Domino d in handOfDominos)
+            {
+                str += d.ToString() + Environment.NewLine;
+            }
+            return str;
+        }
     }
 }

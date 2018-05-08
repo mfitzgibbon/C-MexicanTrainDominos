@@ -31,7 +31,7 @@ namespace MTDClasses
 
             engineValue = 6;
 
-            dominos.Add(new Domino(6, 6));
+            dominos.Add(new Domino(12, 12));
         }
 
         public Train(int engVal)

@@ -17,6 +17,7 @@ namespace MTDUnitTests
         Boneyard defaultBoneyard;
         Hand overloadedHand;
         Domino domino6;
+        Train defaultTrain;
 
         [SetUp]
         public void SetUpAllTests()
@@ -25,6 +26,7 @@ namespace MTDUnitTests
             domino6 = new Domino(6, 6);
             defaultHand = new Hand();
             defaultBoneyard = new Boneyard();
+            defaultTrain = new Train();
         }
 
         [Test]
@@ -60,7 +62,7 @@ namespace MTDUnitTests
         [Test]
         public void HandDominoHasAndGets()
         {
-           defaultHand.Add(domino12);
+            defaultHand.Add(domino12);
 
             Assert.True(defaultHand.HasDomino(domino12.Side1));
             Assert.True(defaultHand.HasDoubleDomino(domino12.Side1));
@@ -75,7 +77,7 @@ namespace MTDUnitTests
             try
             {
                 defaultHand.IndexOfDomino(-1);
-            }catch(Exception)
+            } catch (Exception)
             {
                 Assert.Pass("Method threw the proper exception");
             }
@@ -83,7 +85,7 @@ namespace MTDUnitTests
             try
             {
                 defaultHand.IndexOfDoubleDomino(-1);
-            }catch(Exception)
+            } catch (Exception)
             {
                 Assert.Pass("Method threw the proper exception");
             }
@@ -92,11 +94,36 @@ namespace MTDUnitTests
             {
                 Domino d = defaultHand.GetDoubleDomino(12);
                 defaultHand.IndexOfHighDouble();
-            }catch(Exception)
+            } catch (Exception)
             {
                 Assert.Pass("Method threw the expected exception");
             }
         }
 
+        [Test]
+        public void HandPlayMethods()
+        {
+            try
+            {
+                defaultHand.Add(domino12);
+                defaultHand.Play(domino12, defaultTrain);
+                defaultHand.Play(defaultTrain);
+                defaultHand.Play(defaultTrain);
+            }
+            catch (Exception)
+            {
+                Assert.Pass("Method threw the proper exception");
+            }
+
+            try
+            {
+                defaultHand.Play(3, defaultTrain);
+            }
+            catch (Exception)
+            {
+                Assert.Pass("Method threw the proper exception");
+            }
+
+        }
     }
 }
