@@ -25,6 +25,24 @@ namespace MTDClasses
         public int PlayableValue => dominos.Last().Side2;
         public Domino this[int i] => dominos[i];
 
+        public Train()
+        {
+            dominos = new List<Domino>();
+
+            engineValue = 6;
+
+            dominos.Add(new Domino(6, 6));
+        }
+
+        public Train(int engVal)
+        {
+            dominos = new List<Domino>();
+
+            engineValue = engVal;
+
+            dominos.Add(new Domino(engVal, engVal));
+        }
+
         public void Add(Domino d) => this.dominos.Add(d);
 
         //public bool IsPlayable(Domino d, out bool mustFlip) =>
@@ -49,7 +67,28 @@ namespace MTDClasses
             }
         }
 
-        public void Play(Domino d) => this.dominos.Remove(d);
+        public void Play(Domino d)
+        {
+            bool mustFlip;
+            if(IsPlayable(d, out mustFlip))
+            {
+                if (!mustFlip)
+                {
+                    this.dominos.Add(d);
+                }
+                else
+                {
+                    d.Flip();
+                    this.dominos.Add(d);
+                }
+
+            }
+            else
+            {
+                throw new ArgumentException("This domino is not playable");
+            }
+        }
+
         public string Show(int number) => this[number].ToString();
 
         public override string ToString()
