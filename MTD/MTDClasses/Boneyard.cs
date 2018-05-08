@@ -59,7 +59,8 @@ namespace MTDClasses
 
         public Domino Draw()
         {
-            Domino d = listOfDominos.Last();
+            Random rng = new Random();
+            Domino d = listOfDominos[rng.Next(0,listOfDominos.Count)];
             listOfDominos.Remove(d);
             return d;
         }
